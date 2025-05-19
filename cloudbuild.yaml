@@ -31,6 +31,7 @@ steps:
           --region=us-central1 \
           --platform=managed \
           --service-account=gcp-admin@elevated-column-458305-f8.iam.gserviceaccount.com
+          --allow-unauthenticated
 
 # Store built images in Artifact Registry
 images:
