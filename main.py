@@ -31,7 +31,7 @@ def load_inventory_state():
         return {}
 
 @app.route("/", methods=["GET"])
-def main(request):
+def main():
     """Generate an inventory report."""
     if request.method != "GET":
         return "Method not allowed", 405
