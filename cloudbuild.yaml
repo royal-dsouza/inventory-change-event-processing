@@ -1,0 +1,40 @@
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    id: "Build"
+    args:
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/inventory-change-event-processor-repo/inventory-change-event-processor-image:$COMMIT_SHA'
+      - '.'
+
+  # Step 2: Push the Docker image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/inventory-change-event-processor-repo/inventory-change-event-processor-image:$COMMIT_SHA'
+
+  # Step 3: Deploy to cloud run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy-cloud-run'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run deploy inventory-report \
+          --image=us-central1-docker.pkg.dev/$PROJECT_ID/inventory-change-event-processor-repo/inventory-change-event-processor-image:$COMMIT_SHA \
+          --region=us-central1 \
+          --platform=managed \
+          --service-account=gcp-admin@elevated-column-458305-f8.iam.gserviceaccount.com
+
+# Store built images in Artifact Registry
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/inventory-change-event-processor-repo/inventory-change-event-processor-image:$COMMIT_SHA'
+
+# Timeout for the entire build process
+timeout: '1800s'  # 30 minutes
