@@ -20,7 +20,9 @@ Develop a system to capture inventory change events, publish them to Pub/Sub, en
 
 ## Solution
 
-![architecture diagram](architecture.png)
+![inventory-stock drawio (1)](https://github.com/user-attachments/assets/58301487-d06c-407d-8db4-c0945215d5d0)
+
+
 
 ```bash
 .
