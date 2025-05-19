@@ -34,11 +34,13 @@ Develop a system to capture inventory change events, publish them to Pub/Sub, en
 │   └── inventory_pb2.py        # Generated Protobuf classes
 ├── protobuf_publisher.py       # Publishes Protobuf-encoded messages
 ├── protobuf_consumer.py        # Subscribes and validates Protobuf messages
-├── low_stock_alert_function.py # Cloud Run Flask app for low-stock alerts
-├── main.py                     # HTTP endpoint for nightly summary
+├── low_stock_alert_function.py # Cloud Run function for updating inventory and send low-stock alerts
+├── main.py                     # Cloud Run service for Generating HTTP endpoint for nightly summary
 ├── inventory_adjustments.csv   # Sample input data
 ├── inventory_state.json        # Local state snapshot
-├── requirements.txt            # Python dependencies
+├── Dockerfile                  # Container config for Cloud Run service
+├── cloudbuild.yaml             # CI/CD pipeline for Cloud run service
+├── requirements.txt            # Python dependencies for Cloud Run service
 └── README.md                   # This file
 ```
 
