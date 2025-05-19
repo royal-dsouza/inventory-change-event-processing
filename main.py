@@ -3,10 +3,10 @@ import json
 import os
 from flask import jsonify, request, Flask
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv(
-    "GOOGLE_APPLICATION_CREDENTIALS",
-    "/Users/royaldsouza/Downloads/my_gcp_project.json"
-)
+# os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv(
+#     "GOOGLE_APPLICATION_CREDENTIALS",
+#     "/Users/royaldsouza/Downloads/my_gcp_project.json"
+# )
 
 app = Flask(__name__)
 
